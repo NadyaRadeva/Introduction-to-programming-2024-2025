@@ -1,0 +1,276 @@
+#include<iostream>
+/*constexpr?=const*/ //обръщане на масив
+
+//Declarations
+const size_t MAX_ARRAY_SIZE = 1000;
+
+void swap(int a, int b);
+
+void inputArray(int array[], size_t n);
+void outputArray(int array[], size_t n);
+
+//Exercise 1
+void removeElementInArrayAtIndex(int array[], int& n, int index);
+
+//Exercise 2
+void createIntervalArray(int array[], int result[], int& n, int a, int b);
+
+//Exercise 3
+bool isArraySymmetric(int array[], int n);
+
+//Exercise 4
+int findMaxLenOfSameElements(int array[], int n);
+
+//Exercise 5
+void removeNegativeElementsFromArray(int array[], int n);
+
+//Exercise 6
+bool isOneOfYourArraysSubsetOfTheOther(int array[], int array1[], int n, int n1);
+
+//Definitions
+void swap(int a, int b) {
+	int temp = a;
+	a = b;
+	b = temp;
+}
+
+void inputArray(int array[], size_t n) {
+	std::cout << "Enter the elements in your array: ";
+	for (size_t i = 0; i < n; ++i) {
+		std::cin >> array[i];
+	}
+}
+
+void outputArray(int array[], size_t n) {
+	std::cout << "The elements in your array are: ";
+	for (size_t i = 0; i < n; ++i) {
+		std::cout << array[i] << " ";
+	}
+	std::cout << std::endl;
+}
+
+//Exercise 1
+void removeElementInArrayAtIndex(int array[], int& n, int index) {
+	int newArray[MAX_ARRAY_SIZE];
+
+	for (size_t i = 0; i < index; ++i) {
+		newArray[i] = array[i];
+	}
+	for (size_t i = index + 1; i < n; ++i) {
+		newArray[i - 1] = array[i];
+	}
+
+	if (n - 1 <= MAX_ARRAY_SIZE) {
+		outputArray(newArray, n - 1);
+	}
+	else {
+		return;
+	}
+}
+
+//Exercise 2
+void createIntervalArray(int array[], int result[], int& n, int a, int b) {
+	if (a > b) {
+		swap(a, b);
+	}
+
+	int counter = 0;
+
+	for (size_t i = 0, j = 0; i < n; ++i) {
+		if (array[i] > a && array[i] < b) {
+			result[j] = array[i];
+			++j;
+			++counter;
+		}
+	}
+
+	outputArray(result, n - counter + 1);
+}
+
+//Exercise 3
+bool isArraySymmetric(int array[], int n) {
+	bool isSymmetric = false;
+
+	for (size_t i = 0; i < n; ++i) {
+		if (array[i] == array[n - i + 1]) {
+			isSymmetric = true;
+		}
+	}
+
+	return isSymmetric;
+}
+
+//Exercise 4 - Погледни
+int findMaxLenOfSameElements(int array[], int n) {
+	int maxCount = 0, counter = 0;
+
+	for (size_t i = 0; i < n; ++i) {
+		while (array[i] == array[i + 1]) {
+			++counter;
+		}
+
+		if (maxCount < counter) {
+			maxCount = counter;
+		}
+
+		counter = 0;
+	}
+
+
+	return maxCount;
+}
+
+//Exercise 5 - погледни
+void removeNegativeElementsFromArray(int array[], int n) {
+	int newArray[MAX_ARRAY_SIZE];
+	int counter = 0;
+
+	for (size_t i = 0, j = 0; i < n; ++i) {
+		if (array[i] >= 0) {
+			newArray[j] == array[i];
+			++j;
+			++counter;
+		}
+	}
+
+	outputArray(array, n - counter + 1);
+}
+
+//Exercise 6
+bool isOneOfYourArraysSubsetOfTheOther(int array[], int array1[], int n, int n1) {
+	bool isSubset = false;
+
+	for (size_t i = 0; i < n; ++i) {
+		for (size_t j = 0; j < n1; ++j) {
+			if (array[i] == array[j]) {
+				isSubset = true;
+			}
+		}
+	}
+
+	return isSubset;
+}
+
+int main() {
+	//Exercise 1
+	/*int n;
+	std::cout << "Enter the size of your array: ";
+	std::cin >> n;
+	if (!std::cin || n > MAX_ARRAY_SIZE || n < 0) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	int array[MAX_ARRAY_SIZE];
+
+	inputArray(array, n);
+	outputArray(array, n);
+
+	size_t index;
+	std::cout << "Enter the index of the element you want removed: ";
+	std::cin >> index;
+	if (!std::cin || index > n) {
+		std::cerr << "Your input is incorrect! Your index should be between 0 and the size of your array!" << std::endl;
+	}
+
+	removeElementInArrayAtIndex(array, n, index);*/
+
+	//Exercise 2
+	/*int n;
+	std::cout << "Enter the size of your array: ";
+	std::cin >> n;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+	}
+
+	int array[MAX_ARRAY_SIZE];
+	int result[MAX_ARRAY_SIZE];
+
+	inputArray(array, n);
+	outputArray(array, n);
+
+	int a, b;
+	std::cout << "Enter the beginning and end of your interval: ";
+	std::cin >> a >> b;
+	if (!std::cin) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	createIntervalArray(array, result, n, a, b);
+	*/
+
+	//Exercise 3
+	/*int n;
+	std::cout << "Enter the size of your array: ";
+	std::cin >> n;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+	
+	int array[MAX_ARRAY_SIZE];
+	inputArray(array, n);
+	outputArray(array, n);
+
+	std::cout << "Is your array symmetric? - " << isArraySymmetric(array, n) << std::endl;*/
+
+	//Exercise 4
+	/*int n;
+	std::cout << "Enter the size of your array: ";
+	std::cin >> n;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	int array[MAX_ARRAY_SIZE];
+	inputArray(array, n);
+	outputArray(array, n);
+
+	std::cout << findMaxLenOfSameElements(array, n) << std::endl;*/
+
+	//Exercise 5
+	/*int n;
+	std::cout << "Enter the size of your array: ";
+	std::cin >> n;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	int array[MAX_ARRAY_SIZE];
+	inputArray(array, n);
+	outputArray(array, n);
+
+	removeNegativeElementsFromArray(array, n);*/
+
+	//Exercise 6
+	int n;
+	std::cout << "Enter the size of your first array: ";
+	std::cin >> n;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	int array[MAX_ARRAY_SIZE];
+	inputArray(array, n);
+	outputArray(array, n);
+
+	int n1;
+	std::cout << "Enter the size of your second array: ";
+	std::cin >> n1;
+	if (!std::cin || n < 0 || n > MAX_ARRAY_SIZE) {
+		std::cerr << "Your input is incorrect!" << std::endl;
+		return 1;
+	}
+
+	int array1[MAX_ARRAY_SIZE];
+	inputArray(array1, n1);
+	outputArray(array1, n1);
+
+	std::cout << isOneOfYourArraysSubsetOfTheOther(array, array1, n, n1) << std::endl;
+
+	return 0;
+}
