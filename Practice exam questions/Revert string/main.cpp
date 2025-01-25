@@ -3,7 +3,7 @@
 
 int main() {
 	int strSize;
-	std::cout << "Enter the size of your matrix: ";
+	std::cout << "Enter the size of your string: ";
 	std::cin >> strSize;
 	if (!std::cin || strSize < 0) {
 		std::cerr << "Invalid input! The size should be a positive integer number!" << std::endl;
